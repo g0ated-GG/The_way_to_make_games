@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://boxgmwfbnwnk0"]
+
+[ext_resource type="Texture2D" uid="uid://c5ewpnhd2sm8j" path="res://tictactoe.svg" id="1_arwqd"]
+
+[resource]
+atlas = ExtResource("1_arwqd")
+region = Rect2(3, 3, 69, 69)
