@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bh3kb4xsxl0c"]
+
+[node name="GameButton" type="Button"]
+custom_minimum_size = Vector2(48, 48)
+offset_right = 48.0
+offset_bottom = 48.0
+icon_alignment = 1
+expand_icon = true

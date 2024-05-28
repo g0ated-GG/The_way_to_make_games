@@ -10,84 +10,51 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rctj1")
 
-[node name="NewGameButton" type="Button" parent="."]
+[node name="SettingsPanel" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="NewGameButton" type="Button" parent="SettingsPanel"]
 layout_mode = 2
 text = "New game"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsPanel"]
+layout_mode = 2
+
+[node name="ColumnsSpinBox" type="SpinBox" parent="SettingsPanel"]
+layout_mode = 2
+min_value = 2.0
+max_value = 1000.0
+value = 3.0
+
+[node name="RowsSpinBox" type="SpinBox" parent="SettingsPanel"]
+layout_mode = 2
+min_value = 2.0
+max_value = 1000.0
+value = 3.0
+
+[node name="VSeparator2" type="VSeparator" parent="SettingsPanel"]
+layout_mode = 2
+
+[node name="SetSizeButton" type="Button" parent="SettingsPanel"]
+layout_mode = 2
+text = "Set size"
 
 [node name="Game" type="Control" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="GameButtons" type="GridContainer" parent="Game"]
-layout_mode = 2
-offset_top = 4.0
-offset_right = 200.0
-offset_bottom = 215.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 columns = 3
-
-[node name="Button0" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button1" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button2" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button3" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button4" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button5" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button6" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button7" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
-
-[node name="Button8" type="Button" parent="Game/GameButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-icon_alignment = 1
-expand_icon = true
 
 [node name="Overlay" type="Control" parent="Game"]
 visible = false
@@ -102,5 +69,6 @@ grow_vertical = 2
 wait_time = 0.5
 one_shot = true
 
-[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/SetSizeButton" to="." method="_on_set_size_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

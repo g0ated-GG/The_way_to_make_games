@@ -15,11 +15,6 @@ run/main_scene="res://game_panel.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 
-[display]
-
-window/size/viewport_width=200
-window/size/viewport_height=250
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

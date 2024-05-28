@@ -7,28 +7,50 @@ const O = -1
 const X_icon = preload("res://X.tres")
 const O_icon = preload("res://O.tres")
 
-@export var field_size = Vector2(3, 3)
+const GameButton = preload("res://game_button.tscn")
+
+@export var field_size = Vector2(0, 0) :
+	get:
+		return field_size
+	set(value):
+		# Reshape the grid.
+		$Game/GameButtons.columns = value.x
+		var diff = value.x * value.y - field_size.x * field_size.y
+		if diff > 0: # Need to add the buttons.
+			for i in range(diff):
+				var button = GameButton.instantiate()
+				$Game/GameButtons.add_child(button)
+		elif diff < 0: # Need to reduce the buttons count.
+			for i in range(diff):
+				$Game/GameButtons.remove_child($Game/GameButtons.get_children().back())
+		# Reconnect the buttons.
+		for i in range($Game/GameButtons.get_child_count()):
+			var button = $Game/GameButtons.get_child(i)
+			for conn in button.get_signal_connection_list('pressed'):
+				button.pressed.disconnect(conn['callable'])
+			var y = int(i / value.x)
+			var x = i - y * value.x
+			button.pressed.connect(step.bind(x, y))
+		field_size = value
+		# Reshape the model.
+		field.resize(value.x * value.y)
 
 # Game model.
 var field : Array[int] = [ ]
 
-# Clear model and view.
+# Clear the model and view.
 func clear():
 	field.fill(EMPTY)
-	for y in range(field_size.y):
-		for x in range(field_size.x):
-			get_node("Game/GameButtons/Button"+str(y*field_size.x + x)).icon = null
+	for button in $Game/GameButtons.get_children():
+		button.icon = null
+	$SettingsPanel/ColumnsSpinBox.value = field_size.x
+	$SettingsPanel/RowsSpinBox.value = field_size.y
 	$Game/Overlay.visible = false
 
 func _ready():
 	randomize()
-	field.resize(field_size.x * field_size.y)
+	field_size = Vector2(3, 3)
 	clear()
-	# Buttons connecting.
-	for y in range(field_size.y):
-		for x in range(field_size.x):
-			var button = get_node("Game/GameButtons/Button"+str(y*field_size.x + x))
-			button.pressed.connect(step.bind(x, y))
 
 # Mark cell by user or enemy.
 func mark(sign : int, x : int, y : int):
@@ -37,7 +59,7 @@ func mark(sign : int, x : int, y : int):
 			y >= 0 and y < field_size.y:
 		var i = y*field_size.x + x
 		field[i] = sign
-		var button = get_node("Game/GameButtons/Button"+str(i))
+		var button = $Game/GameButtons.get_child(i)
 		match sign:
 			X:
 				button.icon = X_icon
@@ -121,3 +143,6 @@ func _on_timer_timeout():
 
 func _on_new_game_button_pressed():
 	clear()
+
+func _on_set_size_button_pressed():
+	field_size = Vector2($SettingsPanel/ColumnsSpinBox.value, $SettingsPanel/RowsSpinBox.value)
