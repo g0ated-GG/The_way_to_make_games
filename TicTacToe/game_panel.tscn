@@ -21,11 +21,19 @@ text = "New game"
 [node name="VSeparator" type="VSeparator" parent="SettingsPanel"]
 layout_mode = 2
 
+[node name="ColumnsLabel" type="Label" parent="SettingsPanel"]
+layout_mode = 2
+text = "Columns:"
+
 [node name="ColumnsSpinBox" type="SpinBox" parent="SettingsPanel"]
 layout_mode = 2
 min_value = 2.0
 max_value = 1000.0
 value = 3.0
+
+[node name="RowsLabel" type="Label" parent="SettingsPanel"]
+layout_mode = 2
+text = "Rows:"
 
 [node name="RowsSpinBox" type="SpinBox" parent="SettingsPanel"]
 layout_mode = 2

@@ -21,8 +21,9 @@ const GameButton = preload("res://game_button.tscn")
 				var button = GameButton.instantiate()
 				$Game/GameButtons.add_child(button)
 		elif diff < 0: # Need to reduce the buttons count.
-			for i in range(diff):
-				$Game/GameButtons.remove_child($Game/GameButtons.get_children().back())
+			for i in range(-diff):
+				var last_child = $Game/GameButtons.get_child($Game/GameButtons.get_child_count() - 1)
+				$Game/GameButtons.remove_child(last_child)
 		# Reconnect the buttons.
 		for i in range($Game/GameButtons.get_child_count()):
 			var button = $Game/GameButtons.get_child(i)
@@ -69,6 +70,8 @@ func mark(sign : int, x : int, y : int):
 				button.icon = null
 
 # Checking selected line.
+# If user win, returns true, if enemy win - return false.
+# Returns null if the game continues.
 func check_line(line : Array[int]):
 	var sum = 0
 	for i in line:
@@ -80,6 +83,8 @@ func check_line(line : Array[int]):
 	return null
 
 # Checking all lines (horizontal, vertical and diagonal).
+# If user win, returns true, if enemy win - return false.
+# Returns null if the game continues.
 func check():
 	# Rows.
 	for y in range(field_size.y):
@@ -107,10 +112,11 @@ func check():
 	res = check_line(buffer)
 	if res != null:
 		return res
-	# game continues
+	# The game continues.
 	return null
 
 # Checking game state. If you win or lose, it makes sense to show the message about it.
+# Returns true if the game continues. Returns false if the game is over.
 func check_game():
 	var state = check()
 	if state == true:
