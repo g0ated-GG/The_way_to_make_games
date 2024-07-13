@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6j0t7jrrvyp6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnjc8"]
+bg_color = Color(0.197937, 0.197937, 0.197937, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsqe6"]
+font_size = 48
+font_color = Color(1, 1, 0, 1)
+
+[node name="NumberLabel" type="Label"]
+custom_minimum_size = Vector2(64, 64)
+theme_override_styles/normal = SubResource("StyleBoxFlat_lnjc8")
+label_settings = SubResource("LabelSettings_jsqe6")
+horizontal_alignment = 1

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://me44kgaggou"]
+
+[ext_resource type="Script" path="res://user_input.gd" id="1_5nro0"]
+
+[node name="UserInput" type="LineEdit"]
+theme_override_font_sizes/font_size = 32
+text = "1234"
+placeholder_text = "Input value and press Enter"
+alignment = 1
+max_length = 4
+script = ExtResource("1_5nro0")
