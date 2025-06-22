@@ -12,9 +12,5 @@ config_version=5
 
 config/name="TicTacToe"
 run/main_scene="res://game_panel.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.png"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
